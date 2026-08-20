@@ -11,8 +11,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy your application source code into the container
 COPY . .
 
-# Expose the port Streamlit runs on
+# Expose the port
 EXPOSE 8501
 
-# Run the Streamlit web app with proxy-safe flags
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0", "--server.enableCORS=false", "--server.enableXsrfProtection=false"]
+# Use shell form (no square brackets) so Render's dynamic $PORT environment variable is evaluated correctly
+CMD streamlit run app.py --server.port=${PORT:-8501} --server.address=0.0.0.0 --server.enableCORS=false --server.enableXsrfProtection=false
