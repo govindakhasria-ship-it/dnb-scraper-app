@@ -1,4 +1,4 @@
-# Use Microsoft's official Playwright Python image which contains Chromium and Linux system dependencies
+# Use Microsoft's official Playwright Python image
 FROM mcr.microsoft.com/playwright/python:v1.40.0-jammy
 
 # Set the working directory inside the cloud container
@@ -14,5 +14,5 @@ COPY . .
 # Expose the port Streamlit runs on
 EXPOSE 8501
 
-# Run the Streamlit web app
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+# Run the Streamlit web app with proxy-safe flags
+CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0", "--server.enableCORS=false", "--server.enableXsrfProtection=false"]
